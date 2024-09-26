@@ -1,6 +1,10 @@
+// Get references to the input box, list container, and category select
 const inputBox = document.getElementById("input-box");
 const listContainer = document.getElementById("list-container");
+const categorySelect = document.getElementById('category-select'); // get the category select element
+let tasks = JSON.parse(localStorage.getItem('tasks'))|| []; // load tasks from localStorage or initializes an empty array
 
+// add task function
 function addTask(){
     /*If field empty give alert*/
     if(inputBox.value === ''){
@@ -9,53 +13,55 @@ function addTask(){
     }
     
     else{
-        /* creating one html elemenet with tag line li, and storing element in li variable*/
-        let li = document.createElement("li");
-        /* add text inside li into innerhtml */
-        li.innerHTML = inputBox.value;
-        /* display li under listContainer*/
-        listContainer.appendChild(li);
+        let taskText = inputBox.value; // get the task text
+        let category = categorySelect.value; // get the selected category
+        tasks.push({ text: taskText, category: category }); // add task to the tasks array
+        inputBox.value = ""; //clear the input box
 
-        // Add Catergory 
-        let catergory = 'Home'; //assign all tasks to home
-        tasks.push({text: inputBox.value, catergory: catergory});
-
-        let span = document.createElement("span");
-        /* Cross Icon*/
-        span.innerHTML = "\u00d7";
-        /*display cross*/
-        li.appendChild(span);
+        renderTasks(); //render tasks
+        saveData(); //save tasks to localstorage
     }
     inputBox.value = "";
     saveData();
 }
 
-function filterTasks(catergory){
-    listContainer.innerHTML = '';
-    let filterTasks = tasks.filter(tasks => catergory === 'All' || tasks.catergory === catergory);
+// Filter tasks by category
+function filterTasks(category) {
+    //filter tasks based on the selected category
+    let filteredTasks = tasks.filter(task => category === 'All' || task.category === category);
+    renderTasks(filteredTasks); //render the filtered tasks
+}
 
-    filterTasks.forEach(task =>{
-        let li = document.createElement("li");
-        li.innerHTML = task.text;
-        listContainer.appendChild(li);
+// Render tasks in the UI
+function renderTasks(taskArray = tasks) {
+    listContainer.innerHTML = ''; // Clear list
+
+    // loop through the tasks and create list items
+    taskArray.forEach((task, index) => {
+        let li = document.createElement("li");// create a new list item
+        li.innerHTML = task.text; // set the text of the task
+
+        // Add the "X" (delete) button
+        let span = document.createElement("span");
+        span.innerHTML = "\u00d7"; // set the inner html to "X"
+        span.onclick = () => deleteTask(index); // set the delete function to be called on click
+        li.appendChild(span); //append the delete button to the list item
+
+        listContainer.appendChild(li); //append the list item to the list container
     });
 }
 
-listContainer.addEventListener("click", function(e){
-    if(e.target.tagName === "LI"){
-        e.target.classList.toggle("checked");
-        saveData();
-        }
-        else if(e.target.tagName === "SPAN"){
-            e.target.parentElement.remove();
-            saveData();
-        }
-}, false);
+// Delete Task
+function deleteTask(index) {
+    tasks.splice(index, 1); // Remove task from the array
+    renderTasks(); //re-render the tasks
+    saveData(); //Save the updated tasks to local storage
+}
 
-function saveData(){
-    localStorage.setItem("data", listContainer.innerHTML);
+// Save tasks to localStorage
+function saveData() {
+    localStorage.setItem('tasks', JSON.stringify(tasks)); // save the tasks as a JSON string
 }
-function showTask(){
-    listContainer.innerHTML = localStorage.getItem("data");
-}
-showTask();
+
+// Load tasks on page load
+renderTasks(); //Initial rendering of tasks
