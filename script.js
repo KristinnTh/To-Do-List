@@ -15,6 +15,11 @@ function addTask(){
         li.innerHTML = inputBox.value;
         /* display li under listContainer*/
         listContainer.appendChild(li);
+
+        // Add Catergory 
+        let catergory = 'Home'; //assign all tasks to home
+        tasks.push({text: inputBox.value, catergory: catergory});
+
         let span = document.createElement("span");
         /* Cross Icon*/
         span.innerHTML = "\u00d7";
@@ -23,6 +28,17 @@ function addTask(){
     }
     inputBox.value = "";
     saveData();
+}
+
+function filterTasks(catergory){
+    listContainer.innerHTML = '';
+    let filterTasks = tasks.filter(tasks => catergory === 'All' || tasks.catergory === catergory);
+
+    filterTasks.forEach(task =>{
+        let li = document.createElement("li");
+        li.innerHTML = task.text;
+        listContainer.appendChild(li);
+    });
 }
 
 listContainer.addEventListener("click", function(e){
