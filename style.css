@@ -139,3 +139,16 @@ ul li span{
 ul li span:hover{
     background: #edeef0;
 }
+
+select{
+    border: none;
+    border-radius: 5px;
+    padding: 10px;
+    font-size: 16px;
+    background-color: #f0f0f0;
+    margin-bottom: 20px;
+    cursor: pointer;
+}
+select:hover{
+    background-color: #e0e0e0;
+}
