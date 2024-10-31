@@ -3,6 +3,7 @@ const inputBox = document.getElementById("input-box");
 const listContainer = document.getElementById("list-container");
 const categorySelect = document.getElementById('category-select'); // get the category select element
 let tasks = JSON.parse(localStorage.getItem('tasks'))|| []; // load tasks from localStorage or initializes an empty array
+let selectedCategory = 'All'; //Track the selected category
 
 // add task function
 function addTask(){
@@ -23,30 +24,49 @@ function addTask(){
     }
 }
 
-// Filter tasks by category
+// Filter tasks by category and highlight selected category
 function filterTasks(category) {
+    selectedCategory = category;
     //filter tasks based on the selected category
     let filteredTasks = tasks.filter(task => category === 'All' || task.category === category);
     renderTasks(filteredTasks); //render the filtered tasks
+    updateCategoryHighlight();
 }
 
 // Render tasks in the UI
-function renderTasks(taskArray = tasks) {
+function renderTasks(taskArray = tasks) 
+{
     listContainer.innerHTML = ''; // Clear list
 
     // loop through the tasks and create list items
-    taskArray.forEach((task, index) => {
+    taskArray.forEach((task, index) => 
+        {
         let li = document.createElement("li");// create a new list item
         li.innerHTML =  `<strong>[${task.category}]</strong> ${task.text}`; // show category and task text
+
+        //Add the 'edit' button
+        let editButton = document.createElement("button");
+        editButton.innerHTML = "Edit";
+        editButton.onclick = (event) =>
+        {
+            event.stopPropagation(); // Prevent task toggle on edit click
+            editTask(index);
+        };
+        li.appendChild(editButton);
 
         // Add the "X" (delete) button
         let span = document.createElement("span");
         span.innerHTML = "\u00d7"; // set the inner html to "X"
-        span.onclick = () => deleteTask(index); // set the delete function to be called on click
+        span.onclick = (event) => 
+        {
+            event.stopPropagation(); // Prevent task toggle on delete click
+            deleteTask(index); // set the delete function to be called on click
+        };
         li.appendChild(span); //append the delete button to the list item
 
         // Check if task is completed
-        if (task.completed) {
+        if (task.completed) 
+        {
             li.classList.add("checked");
         }
 
@@ -61,6 +81,15 @@ function renderTasks(taskArray = tasks) {
     });
 }
 
+function editTask(index){
+    let newTaskText = prompt("Edit your Task:", tasks[index].text);
+    if (newTaskText !== null){
+        tasks[index].text = newTaskText;
+        renderTasks();
+        saveData();
+    }
+}
+
 // Delete Task
 function deleteTask(index) {
     tasks.splice(index, 1); // Remove task from the array
@@ -73,5 +102,16 @@ function saveData() {
     localStorage.setItem('tasks', JSON.stringify(tasks)); // save the tasks as a JSON string
 }
 
+//Highlight selected category in the sidebar
+function updateCategoryHighlight(){
+    const categoryItems = document.querySelectorAll("#category-list li");
+    categoryItems.forEach(item => {
+        item.classList.remove("selected-category"); // remove highlight from all items
+    });
+    //Add the selected-category class to the clicked category
+    document.getElementById(selectedCategory).classList.add("selected-category");
+}
+
 // Load tasks on page load
 renderTasks(); //Initial rendering of tasks
+updateCategoryHighlight();
