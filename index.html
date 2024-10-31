@@ -1,7 +1,8 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>To-Do List App</title>
     <link rel="stylesheet" href="style.css">
 </head>
@@ -9,7 +10,7 @@
     <div class="container">
         <div class="sideBar">
             <h3>Categories</h3>
-            <ul id="category-list"> <!-- Corrected ID -->
+            <ul id="category-list">
                 <li id="All" onclick="filterTasks('All')">
                     <span class="checkmark">✔</span> All
                 </li>
@@ -27,7 +28,7 @@
         <div class="todo-app">
             <h2>To-Do List <img src="img/Note.png" alt="Notepad with pencil icon"></h2>
             <div class="row">
-                <input type="text" id="input-box" placeholder="Add your text">
+                <input type="text" id="input-box" placeholder="Add your text" />
                 <select id="category-select">
                     <option value="Home">Home</option>
                     <option value="Work">Work</option>

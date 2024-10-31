@@ -7,19 +7,19 @@
 html, body {
     height: 100%;
     background: linear-gradient(135deg, #7efc91, #19d9df);
-    font-family: 'Arial', sans-serif; /* Use a clean font */
+    font-family: 'Arial', sans-serif;
 }
 
 .container {
+    display: flex;
     width: 100%;
     min-height: 100vh;
-    display: flex;
     justify-content: center;
     align-items: stretch;
 }
 
 .sideBar {
-    width: 200px;
+    width: 220px;
     background-color: #002765;
     color: white;
     padding: 20px;
@@ -54,10 +54,10 @@ html, body {
     width: 100%;
     max-width: 540px;
     background: #fff;
-    margin: 100px auto 20px;
+    margin: 50px auto 20px;
     padding: 40px 30px 70px;
-    border-radius: 10px; /* Round corners for the app */
-    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1); /* Add shadow for depth */
+    border-radius: 10px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
 }
 
 .todo-app h2 {
@@ -79,7 +79,7 @@ html, body {
     justify-content: space-between;
     background: #edeef0;
     border-radius: 30px;
-    padding-left: 20px;
+    padding: 10px;
     margin-bottom: 25px;
 }
 
@@ -88,22 +88,23 @@ input {
     border: none;
     outline: none;
     background: transparent;
+    padding: 10px;
 }
 
 button {
     border: none;
     outline: none;
-    padding: 12px 20px; /* Consistent padding */
+    padding: 10px 20px;
     background: #8045ff;
     color: #fff;
     font-size: 16px;
     cursor: pointer;
-    border-radius: 40px; /* Round corners */
-    transition: background-color 0.3s; /* Smooth hover effect */
+    border-radius: 30px;
+    transition: background-color 0.3s;
 }
 
 button:hover {
-    background: #703cc3; /* Darker color on hover */
+    background: #703cc3;
 }
 
 ul {
@@ -117,18 +118,36 @@ ul li {
     user-select: none;
     cursor: pointer;
     position: relative;
-    border-bottom: 1px solid #e0e0e0; /* Add subtle border between tasks */
+    border-bottom: 1px solid #e0e0e0;
+    display: flex;
+    justify-content: space-between; /* Use flexbox for layout */
+    align-items: center; /* Center items vertically */
+}
+
+ul li button {
+    background-color: #008CBA; /* Button color */
+    color: white; /* Text color */
+    border: none;
+    border-radius: 5px; /* Rounded corners */
+    padding: 5px 10px; /* Padding */
+    cursor: pointer; /* Pointer on hover */
+    transition: background-color 0.3s; /* Transition effect */
+    margin-left: 10px; /* Add space between the task text and edit button */
+}
+
+ul li button:hover {
+    background-color: #005f73; /* Darker shade on hover */
 }
 
 ul li::before {
     content: '';
     position: absolute;
-    height: 20px; /* Adjust height for smaller circle */
-    width: 20px; /* Adjust width for smaller circle */
+    height: 20px;
+    width: 20px;
     background-image: url(img/unchecked.png);
     background-size: cover;
     background-position: center;
-    top: 12px; /* Adjust position */
+    top: 12px;
     left: 8px;
 }
 
@@ -142,20 +161,17 @@ ul li.checked::before {
 }
 
 ul li span {
-    position: absolute;
-    right: 0;
-    top: 5px;
-    width: 30px; /* Smaller size for the X button */
-    height: 30px;
-    font-size: 20px;
-    color: #555;
-    line-height: 30px;
-    text-align: center;
-    border-radius: 50%;
+    margin-left: 10px; /* Add space before the "X" button */
+    color: #555; /* Color for the delete button */
+    font-size: 20px; /* Size for the delete button */
+    cursor: pointer; /* Pointer on hover */
+    transition: background-color 0.3s; /* Transition effect */
 }
 
 ul li span:hover {
-    background: #edeef0;
+    background: #edeef0; /* Light background on hover */
+    border-radius: 50%; /* Rounded shape for "X" button */
+    padding: 5px; /* Padding for hover effect */
 }
 
 select {
@@ -166,8 +182,8 @@ select {
     background-color: #f0f0f0;
     margin-bottom: 20px;
     cursor: pointer;
-    width: 100%; /* Make dropdown full width */
-    transition: background-color 0.3s; /* Smooth hover effect */
+    width: 100%;
+    transition: background-color 0.3s;
 }
 
 select:hover {
@@ -178,7 +194,6 @@ select:hover {
     background-color: #003399;
     color: #fff;
     font-weight: bold;
-    position: relative;
 }
 
 .checkmark {
@@ -189,21 +204,4 @@ select:hover {
 
 .selected-category .checkmark {
     display: inline;
-}
-
-/* Styles for the Edit button */
-.edit-button {
-    font-size: 12px; /* Smaller font size for Edit button */
-    padding: 4px 8px; /* Adjust padding for smaller button size */
-    margin-left: 5px; /* Space between task text and button */
-    cursor: pointer; /* Change cursor to pointer on hover */
-    border: none; /* Remove default border */
-    border-radius: 5px; /* Add slight rounding to corners */
-    background-color: #f39c12; /* Different background color for Edit button */
-    color: white; /* Text color */
-    transition: background-color 0.3s; /* Smooth background color change */
-}
-
-.edit-button:hover {
-    background-color: #e67e22; /* Darker background on hover */
 }
