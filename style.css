@@ -143,7 +143,8 @@ ul li button:hover {
     background-color: #005f73; /* Darker shade on hover */
 }
 
-ul li::before {
+/* Only apply this to list items inside the task-list */
+.task-list li::before {
     content: '';
     position: absolute;
     height: 20px;
@@ -155,12 +156,14 @@ ul li::before {
     left: 8px;
 }
 
-ul li.checked {
+
+/* Ensure the checked tasks show the checked image */
+.task-list li.checked {
     color: #555;
     text-decoration: line-through;
 }
 
-ul li.checked::before {
+.task-list li.checked::before {
     background-image: url(img/checked.png);
 }
 
