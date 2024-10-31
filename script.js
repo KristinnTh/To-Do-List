@@ -31,15 +31,29 @@ function renderTasks(taskArray = tasks) {
     listContainer.innerHTML = ''; // Clear list
     taskArray.forEach((task, index) => {
         let li = document.createElement("li");
-        li.innerHTML = `<strong>[${task.category}]</strong> ${task.text}`;
+        
+        // Create elements for displaying task and editing
+        let taskText = document.createElement("span");
+        taskText.innerHTML = `<strong>[${task.category}]</strong> ${task.text}`;
+        li.appendChild(taskText);
+
+        // Create input for editing task
+        let editInput = document.createElement("input");
+        editInput.type = "text";
+        editInput.value = task.text;
+        editInput.style.display = "none"; // Hide initially
+        li.appendChild(editInput);
+
+        // Edit button
         let editButton = document.createElement("button");
         editButton.innerHTML = "Edit";
         editButton.onclick = (event) => {
             event.stopPropagation(); // Prevent task toggle on edit click
-            editTask(index);
+            toggleEditMode(li, task, editInput);
         };
         li.appendChild(editButton);
 
+        // Delete button (X)
         let span = document.createElement("span");
         span.innerHTML = "\u00d7"; // set the inner html to "X"
         span.onclick = (event) => {
@@ -62,12 +76,31 @@ function renderTasks(taskArray = tasks) {
     });
 }
 
-function editTask(index) {
-    let newTaskText = prompt("Edit your Task:", tasks[index].text);
-    if (newTaskText !== null) {
-        tasks[index].text = newTaskText;
-        renderTasks();
-        saveData();
+// Toggle edit mode
+function toggleEditMode(li, task, editInput) {
+    let taskText = li.querySelector('span');
+    if (editInput.style.display === "none") {
+        taskText.style.display = "none"; // Hide task text
+        editInput.style.display = "inline"; // Show input
+        editInput.focus(); // Focus on input for editing
+
+        // Save changes on blur (when input loses focus)
+        editInput.onblur = () => {
+            if (editInput.value) {
+                task.text = editInput.value; // Update task text
+                renderTasks(); // Re-render tasks
+                saveData(); // Save updated tasks
+            } else {
+                renderTasks(); // If empty, just re-render tasks
+            }
+        };
+
+        // Save changes on Enter key press
+        editInput.onkeypress = (event) => {
+            if (event.key === 'Enter') {
+                editInput.onblur(); // Trigger blur event
+            }
+        };
     }
 }
 
