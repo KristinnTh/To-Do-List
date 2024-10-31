@@ -7,10 +7,15 @@ let selectedCategory = 'All'; // Track the selected category
 
 // Add task function
 function addTask() {
-    if (inputBox.value === '') {
-        alert("You must write something!");
+    if (inputBox.value.trim() === '') {
+        // Add a visual cue instead of an alert
+        inputBox.style.border = "2px solid red"; // Highlight the input field
+        setTimeout(() => {
+            inputBox.style.border = ""; // Remove highlight after 1 second
+        }, 1000);
+        return; // Exit the function early
     } else {
-        let taskText = inputBox.value; // get the task text
+        let taskText = inputBox.value.trim(); // get the task text
         let category = categorySelect.value; // get the selected category
         tasks.push({ text: taskText, category: category }); // add task to the tasks array
         inputBox.value = ""; // clear the input box
