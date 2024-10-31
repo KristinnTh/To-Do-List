@@ -21,8 +21,6 @@ function addTask(){
         renderTasks(); //render tasks
         saveData(); //save tasks to localstorage
     }
-    inputBox.value = "";
-    saveData();
 }
 
 // Filter tasks by category
@@ -39,13 +37,25 @@ function renderTasks(taskArray = tasks) {
     // loop through the tasks and create list items
     taskArray.forEach((task, index) => {
         let li = document.createElement("li");// create a new list item
-        li.innerHTML = task.text; // set the text of the task
+        li.innerHTML =  `<strong>[${task.category}]</strong> ${task.text}`; // show category and task text
 
         // Add the "X" (delete) button
         let span = document.createElement("span");
         span.innerHTML = "\u00d7"; // set the inner html to "X"
         span.onclick = () => deleteTask(index); // set the delete function to be called on click
         li.appendChild(span); //append the delete button to the list item
+
+        // Check if task is completed
+        if (task.completed) {
+            li.classList.add("checked");
+        }
+
+        // Toggle the checked status on click
+        li.onclick = () => {
+            task.completed = !task.completed; // toggle the completed status
+            renderTasks(); // re-render tasks
+            saveData(); // save updated tasks
+        };
 
         listContainer.appendChild(li); //append the list item to the list container
     });
