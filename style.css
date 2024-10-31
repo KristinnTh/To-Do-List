@@ -1,20 +1,16 @@
-*{
+* {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
 }
 
-html, body{
+html, body {
     height: 100%;
-    background: linear-gradient(135deg, #7efc91, #19d9df)
+    background: linear-gradient(135deg, #7efc91, #19d9df);
+    font-family: 'Arial', sans-serif; /* Use a clean font */
 }
 
-body{
-    margin: 0;
-    padding: 0;
-}
-
-.container{
+.container {
     width: 100%;
     min-height: 100vh;
     display: flex;
@@ -22,23 +18,24 @@ body{
     align-items: stretch;
 }
 
-.sideBar{
+.sideBar {
     width: 200px;
     background-color: #002765;
     color: white;
     padding: 20px;
-    box-shadow: 2px 0 5px rgba(0,0,0,0.1);
+    box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
 }
-.sideBar h3{
+
+.sideBar h3 {
     margin-bottom: 20px;
 }
 
-.sideBar ul{
+.sideBar ul {
     list-style: none;
     padding: 0;
 }
 
-.sideBar ul li{
+.sideBar ul li {
     cursor: pointer;
     margin-bottom: 15px;
     padding: 10px;
@@ -48,31 +45,35 @@ body{
     transition: background-color 0.3s ease;
 }
 
-.sideBar ul li:hover{
+.sideBar ul li:hover {
     background-color: #003399;
 }
 
-.todo-app{
+.todo-app {
     flex: 1;
     width: 100%;
     max-width: 540px;
     background: #fff;
     margin: 100px auto 20px;
     padding: 40px 30px 70px;
-    border-radius: 10px; /*border round*/
+    border-radius: 10px; /* Round corners for the app */
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1); /* Add shadow for depth */
 }
-.todo-app h2{
+
+.todo-app h2 {
     margin: 0;
     color: #002765;
     display: flex;
     align-items: center;
     margin-bottom: 20px;
 }
-.todo-app img{
+
+.todo-app img {
     width: 30px;
     margin-left: 10px;
 }
-.row{
+
+.row {
     display: flex;
     align-items: center;
     justify-content: space-between;
@@ -81,66 +82,83 @@ body{
     padding-left: 20px;
     margin-bottom: 25px;
 }
-input{
+
+input {
     flex: 1;
     border: none;
     outline: none;
     background: transparent;
 }
-button{
+
+button {
     border: none;
     outline: none;
-    padding: 16px 50px;
+    padding: 12px 20px; /* Consistent padding */
     background: #8045ff;
     color: #fff;
     font-size: 16px;
     cursor: pointer;
-    border-radius: 40px;
+    border-radius: 40px; /* Round corners */
+    transition: background-color 0.3s; /* Smooth hover effect */
 }
-ul li{
+
+button:hover {
+    background: #703cc3; /* Darker color on hover */
+}
+
+ul {
+    padding: 0;
+}
+
+ul li {
     list-style: none;
     font-size: 17px;
     padding: 12px 8px 12px 50px;
     user-select: none;
     cursor: pointer;
     position: relative;
+    border-bottom: 1px solid #e0e0e0; /* Add subtle border between tasks */
 }
-ul li::before{
+
+ul li::before {
     content: '';
     position: absolute;
-    height: 28px;
-    width: 28px;
-    border-radius: 50%;
+    height: 20px; /* Adjust height for smaller circle */
+    width: 20px; /* Adjust width for smaller circle */
     background-image: url(img/unchecked.png);
     background-size: cover;
     background-position: center;
-    top: 12px;
+    top: 12px; /* Adjust position */
     left: 8px;
 }
-ul li.checked{
-color: #555;
-text-decoration: line-through;
+
+ul li.checked {
+    color: #555;
+    text-decoration: line-through;
 }
-ul li.checked::before{
+
+ul li.checked::before {
     background-image: url(img/checked.png);
 }
-ul li span{
+
+ul li span {
     position: absolute;
     right: 0;
     top: 5px;
-    width: 40px;
-    height: 40px;
-    font-size: 22px;
+    width: 30px; /* Smaller size for the X button */
+    height: 30px;
+    font-size: 20px;
     color: #555;
-    line-height: 40px;
+    line-height: 30px;
     text-align: center;
     border-radius: 50%;
 }
-ul li span:hover{
+
+ul li span:hover {
     background: #edeef0;
 }
 
-select{
+select {
     border: none;
     border-radius: 5px;
     padding: 10px;
@@ -148,14 +166,24 @@ select{
     background-color: #f0f0f0;
     margin-bottom: 20px;
     cursor: pointer;
+    width: 100%; /* Make dropdown full width */
+    transition: background-color 0.3s; /* Smooth hover effect */
 }
-select:hover{
+
+select:hover {
     background-color: #e0e0e0;
+}
+
+.selected-category {
+    background-color: #003399;
+    color: #fff;
+    font-weight: bold;
+    position: relative;
 }
 
 .checkmark {
     display: none;
-    color: #82d1fb;
+    color: #fff;
     font-weight: bold;
 }
 
@@ -163,3 +191,19 @@ select:hover{
     display: inline;
 }
 
+/* Styles for the Edit button */
+.edit-button {
+    font-size: 12px; /* Smaller font size for Edit button */
+    padding: 4px 8px; /* Adjust padding for smaller button size */
+    margin-left: 5px; /* Space between task text and button */
+    cursor: pointer; /* Change cursor to pointer on hover */
+    border: none; /* Remove default border */
+    border-radius: 5px; /* Add slight rounding to corners */
+    background-color: #f39c12; /* Different background color for Edit button */
+    color: white; /* Text color */
+    transition: background-color 0.3s; /* Smooth background color change */
+}
+
+.edit-button:hover {
+    background-color: #e67e22; /* Darker background on hover */
+}
