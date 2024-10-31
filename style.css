@@ -75,32 +75,36 @@ html, body {
 
 .row {
     display: flex;
-    align-items: center;
-    justify-content: space-between;
+    align-items: center; /* Center items vertically */
+    justify-content: space-between; /* Space out items */
     background: #edeef0;
     border-radius: 30px;
-    padding: 10px;
+    padding: 10px; /* Adjusted padding for better spacing */
     margin-bottom: 25px;
 }
 
 input {
-    flex: 1;
+    flex: 1; /* Allow input to grow */
     border: none;
     outline: none;
     background: transparent;
-    padding: 10px;
+    padding: 10px; /* Add some padding for better touch target */
+    font-size: 16px; /* Font size for input text */
+    border-radius: 5px; /* Rounded corners */
+    margin-right: 10px; /* Add space between input and dropdown */
 }
 
 button {
     border: none;
     outline: none;
-    padding: 10px 20px;
+    padding: 12px 20px;
     background: #8045ff;
     color: #fff;
     font-size: 16px;
     cursor: pointer;
-    border-radius: 30px;
-    transition: background-color 0.3s;
+    border-radius: 40px; /* Rounded corners */
+    transition: background-color 0.3s; /* Smooth hover effect */
+    margin-left: 10px; /* Space between dropdown and button */
 }
 
 button:hover {
@@ -175,19 +179,17 @@ ul li span:hover {
 }
 
 select {
-    border: none;
-    border-radius: 5px;
-    padding: 10px;
-    font-size: 16px;
-    background-color: #f0f0f0;
-    margin-bottom: 20px;
-    cursor: pointer;
-    width: 100%;
-    transition: background-color 0.3s;
+    border: 1px solid #ccc; /* Light border for dropdown */
+    border-radius: 5px; /* Rounded corners */
+    padding: 10px; /* Padding inside dropdown */
+    font-size: 16px; /* Font size */
+    background-color: #f0f0f0; /* Background color */
+    cursor: pointer; /* Pointer cursor */
+    transition: background-color 0.3s; /* Smooth hover effect */
 }
 
 select:hover {
-    background-color: #e0e0e0;
+    background-color: #e0e0e0; /* Darker background on hover */
 }
 
 .selected-category {
