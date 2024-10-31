@@ -1,43 +1,43 @@
 <!DOCTYPE html>
 <html>
-    <head>
-        <meta name="viewport" content="width=device-width, initial-scale=1">
-        <title>To-Do List App</title>
-        <link rel="stylesheet" href="style.css">
-    </head>
-    <body>
-        <div class="container">
-            <div class="sideBar">
-                <h3>Categories</h3>
-                <ul id="catergory-list">
-                    <li id="All" onclick="filterTasks('All')">All</li>
-                    <li id="Work" onclick="filterTasks('Work')">
-                        <span class="icon work-icon"></span>Work
-                    </li>
-                    <li id="Personal" onclick="filterTasks('Personal')">
-                        <span class="icon personal-icon"></span>Personal
-                    </li>
-                    <li id="Home" onclick="filterTasks('Home')">
-                        <span class="icon home-icon"></span>Home
-                    </li>
-                </ul>
-            </div>
-            <div class="todo-app">
-                <h2>To-Do List <img src="img/Note.png" alt="Notepad with pencil icon"></h2>
-               <div class="row">
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>To-Do List App</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <div class="sideBar">
+            <h3>Categories</h3>
+            <ul id="category-list"> <!-- Corrected ID -->
+                <li id="All" onclick="filterTasks('All')">
+                    <span class="checkmark">✔</span> All
+                </li>
+                <li id="Work" onclick="filterTasks('Work')">
+                    <span class="checkmark">✔</span><span class="icon work-icon"></span> Work
+                </li>
+                <li id="Personal" onclick="filterTasks('Personal')">
+                    <span class="checkmark">✔</span><span class="icon personal-icon"></span> Personal
+                </li>
+                <li id="Home" onclick="filterTasks('Home')">
+                    <span class="checkmark">✔</span><span class="icon home-icon"></span> Home
+                </li>
+            </ul>
+        </div>
+        <div class="todo-app">
+            <h2>To-Do List <img src="img/Note.png" alt="Notepad with pencil icon"></h2>
+            <div class="row">
                 <input type="text" id="input-box" placeholder="Add your text">
-                <!-- Dropdown for category selection -->
                 <select id="category-select">
                     <option value="Home">Home</option>
                     <option value="Work">Work</option>
                     <option value="Personal">Personal</option>
                 </select>
                 <button onclick="addTask()">Add</button>
-               </div> 
-               <ul id="list-container">
-               </ul>
-            </div>
+            </div> 
+            <ul id="list-container"></ul>
         </div>
-<script src="script.js"></script>
-    </body>
+    </div>
+    <script src="script.js"></script>
+</body>
 </html>

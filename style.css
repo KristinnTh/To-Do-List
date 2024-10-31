@@ -153,15 +153,13 @@ select:hover{
     background-color: #e0e0e0;
 }
 
-.selected-category {
-    background-color: #003399;
-    color: #fff;
+.checkmark {
+    display: none;
+    color: #82d1fb;
     font-weight: bold;
-    position: relative;
 }
-.selected-category::before {
-    content: "✔";
-    position: absolute;
-    left: 5px;
-    color: #fff;
+
+.selected-category .checkmark {
+    display: inline;
 }
+
